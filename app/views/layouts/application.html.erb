@@ -10,18 +10,31 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
-
-    <% if logged_in?%>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %><%= stylesheet_link_tag%>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
-
-    <%= yield %>
+    <header>
+      <div class="innerWrap">
+        <div class="menu">
+          <% if logged_in?%>
+            <%= link_to "Logout", session_path(current_user.id), method: :delete %><%= stylesheet_link_tag%>
+            <%= link_to "Home", user_path(current_user.id) %>
+          <% else %>
+            <%= link_to "Sign up", new_user_path %>
+            <%= link_to "Login", new_session_path %>
+          <% end %>
+          <%= link_to 'New Picture', new_picture_path %>
+          </div>
+        <h1>fakebook</h1>
+      </div>
+    </header>
+    <main class="container">
+      <div class="innerWrap">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+    <footer>
+      <p>©mayu nishikawa</p>
+    </footer>
   </body>
 </html>
